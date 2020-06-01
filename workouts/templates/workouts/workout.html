@@ -10,13 +10,19 @@
         <a class="text-decoration-none" href="{% url 'workouts_exercise' exercise.id %}"><h2 class="big-link">{{ exercise.exercise_name }}</h2></a>
         <table class="table table-borderless">
             <tr>
+                <td class="pl-0">
+                    <div class="workout-box">
+                        <br>
+                        <img class="workout-image ml-0" src="/media/exercise_pics/{{ exercise }}.jpg" alt="">
+                    </div>
+                </td>
                 {% for weight in exercise.weight|dictsortreversed:"date_posted"|slice:"3" reversed %}
-                <td>
+                <td class="table-data">
                     <h5>{{ weight.weight }} lbs</h5><p>{{ weight.date_posted|date:'M d' }}</p>
                 </td>
                 
                 {% endfor %}
-                <td>
+                <td class="table-button">
                     <form method="POST">
                         {% csrf_token %}
                         <input class="input-form" id="exercise" type="hidden" name="exercise" value="{{ exercise.id }}">
@@ -30,14 +36,14 @@
         {% endfor %}
         <br>
         <!-- Button trigger modal -->
-    <button type="button" class="btn btn-dark mb-5" data-toggle="modal" data-target="#exampleModal">
+    <button type="button" class="btn btn-dark mb-5" data-toggle="modal" data-target="#{{ workout }}Modal">
         Add Exercise
     </button>
     <br>
     
       
       <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="{{ workout }}Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -53,7 +59,9 @@
                         <label for="exercise_name">Exercise Name: </label>
                         <select id="exercise_name" type="text" name="exercise_name">
                         {% for exercise in exercises %}
-                        <option>{{ exercise }}</option>
+                            {% if exercise.workout_data.name == workout.workout_name %}
+                            <option>{{ exercise }}</option>
+                            {% endif %}
                         {% endfor %}
                         <input type="submit" class="btn-dark" value="Add Exercise" name="btnform2"></input>
                 </div>
