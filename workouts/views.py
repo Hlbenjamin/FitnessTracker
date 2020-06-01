@@ -41,7 +41,8 @@ def home(request):
 
 @login_required
 def workout(request, workout_id):
-    exercise_all = Exercise.objects.all()
+    workouts_all = WorkoutData.objects.all()
+    exercise_all = ExerciseData.objects.all()
     workout_main = Workout.objects.get(id=workout_id)
     form = WeightForm()
     if request.method == 'POST' and 'btnform1' in request.POST:
@@ -69,6 +70,8 @@ def workout(request, workout_id):
 
     context = {
         'workout': workout_main,
+        'exercises': exercise_all,
+        'workouts_all': workouts_all,
         'exercises': exercise_all,
     }
 
