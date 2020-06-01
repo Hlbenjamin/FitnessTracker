@@ -1,0 +1,15 @@
+{% extends 'workouts/base.html' %}
+{% block landing %}
+<div class="landing-main">
+    <div class="container landing-text">
+        <div class="landing-box">
+            <h1 class="display-5">
+                You have been logged out!
+            </h1>
+            <div>
+                <small class="text-muted mb-2">Didn't mean to log out?<a class="nav-link" href="{% url 'login' %}">Log In</a></small>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock landing %}

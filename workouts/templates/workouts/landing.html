@@ -1,0 +1,29 @@
+{% extends 'workouts/base.html' %}
+
+{% block landing %}
+<div class="landing-main">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="container landing-text">
+        <div class="landing-box">
+            <h1 class="display-4">
+                A Simple Fitness Tracking App
+            </h1>
+            <h1 class="display-5">That Won't Get In Your Way</h1>
+            <div class="landing-button">
+                <button class="btn btn-dark">
+                    <a class="text-decoration-none nav-link" href="{% url 'register' %}">Create Free Account</a>
+                </button>
+                <div>
+                    <small class="text-muted">Already have an account?<a class="nav-link" href="{% url 'login' %}">Sign In</a></small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock landing %}

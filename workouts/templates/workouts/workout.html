@@ -1,0 +1,63 @@
+{% extends 'workouts/base.html' %}
+{% block content %}
+<div class="workout-titlebox">
+    <a class="text-decoration-none" href="{% url 'workouts_home' %}"><h2 class="big-link"><i class="fas fa-chevron-left"></i></h2></a>
+    <div class="workout-title">
+        <h1 class="display-4">{{ workout.workout_name }}</h1>
+    </div>
+</div>
+        {% for exercise in workout.exercise %}
+        <a class="text-decoration-none" href="{% url 'workouts_exercise' exercise.id %}"><h2 class="big-link">{{ exercise.exercise_name }}</h2></a>
+        <table class="table table-borderless">
+            <tr>
+                {% for weight in exercise.weight|dictsortreversed:"date_posted"|slice:"3" reversed %}
+                <td>
+                    <h5>{{ weight.weight }} lbs</h5><p>{{ weight.date_posted|date:'M d' }}</p>
+                </td>
+                
+                {% endfor %}
+                <td>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <input class="input-form" id="exercise" type="hidden" name="exercise" value="{{ exercise.id }}">
+                        <input class="input-form" id="weight" type="text" name="weight">
+                        <button type="submit" class="btn btn-dark" name="btnform1">Add Weight</button>
+                    </form>
+                </td>
+                <br>
+            </tr>
+        </table>
+        {% endfor %}
+        <br>
+        <!-- Button trigger modal -->
+    <button type="button" class="btn btn-dark mb-5" data-toggle="modal" data-target="#exampleModal">
+        Add Exercise
+    </button>
+    <br>
+    
+      
+      <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Exercise</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <input id="workout" type="hidden" name="workout" value="{{ workout.id }}">
+                        <label for="exercise_name">Exercise Name: </label>
+                        <select id="exercise_name" type="text" name="exercise_name">
+                        {% for exercise in exercises %}
+                        <option>{{ exercise }}</option>
+                        {% endfor %}
+                        <input type="submit" class="btn-dark" value="Add Exercise" name="btnform2"></input>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

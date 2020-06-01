@@ -1,0 +1,24 @@
+{% extends 'workouts/base.html' %}
+{% load crispy_forms_tags %}
+{% block landing %}
+<div class="landing-main">
+    <div class="container landing-text">
+        <div class="landing-box">
+            <div class="content-section">
+                <form method="POST">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <legend class="display-5">Log In</legend>
+                        {{ form|crispy }}
+                    </fieldset>
+                    <button class="btn btn-dark mb-2" type="submit">Log In</button>
+                </form>
+                <div>
+                    <small class="text-muted">Don't have an account?<a class="nav-link" href="{% url 'register' %}">Create Free Account</a></small>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock landing %}

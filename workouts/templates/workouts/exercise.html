@@ -1,0 +1,58 @@
+{% extends 'workouts/base.html' %}
+{% block scripts %}
+<script>
+$(document).ready(function(){
+    var ctx = document.getElementById('myChart');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [{% for weight in weights %}'{{ weight.date_posted|date:'M d' }}',{% endfor %}],
+            datasets: [{
+                label: 'Weight',
+                data: [{% for weight in weights %}{{ weight.weight }},{% endfor %}],
+                fill: true,
+                backgroundColor: [
+                    'rgba(255, 127, 80, 0.6)',
+                ],
+                borderColor: [
+                    'rgb(255, 127, 80)',
+                ],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: false
+                    }
+                }]
+            }
+        }
+    });
+
+});
+</script>
+{% endblock scripts %}
+{% block content %}
+    <div class="exercise-titlebox">
+        <a class="text-decoration-none" href="{% url 'workouts_workout' exercise.workout_id %}"><h2 class="big-link"><i class="fas fa-chevron-left"></i></h2></a>
+        <div class="exercise-title">
+            <h1 class="display-4">{{ exercise.exercise_name }}</h1>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table">
+            <tr>
+                {% for weight in exercise.weight %}
+                <td>
+                    <h5>{{ weight.weight }} lbs</h5><p>{{ weight.date_posted|date:'M d' }}</p>
+                </td>
+                
+                {% endfor %}
+                <br>
+            </tr>
+        </table>
+    </div>
+    <canvas id="myChart" width="400" height="150"></canvas>
+{% endblock content %}

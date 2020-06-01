@@ -1,0 +1,135 @@
+body main {
+    min-height: calc(100vh - 7rem);
+}
+
+.nav-link {
+    color: coral;
+    display: inline-block;
+}
+.nav-link:hover {
+    color: white;
+}
+.navbar-brand {
+    margin-left: 1rem;
+}
+h1, h2, h3, h4, h5, h6 {
+    color: rgb(52, 58, 64);
+}
+
+a .big-link {
+    display: inline-block;
+}
+
+a .big-link:hover {
+    color: coral;
+    text-decoration: none;
+}
+.input-form {
+  width: 100px;
+}
+
+/* Landing Page */
+.landing-main {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), white url("/media/weights.jpg") no-repeat;
+    background-size: 150%;
+    min-height: calc(100vh - 7rem);
+    color: white;
+    text-align: center;
+}
+
+.landing-text {
+    padding: 6rem;
+}
+
+.landing-text h1 {
+    color: white;
+    text-align: center;
+}
+
+.landing-button {
+    text-align: center;
+    padding: 1rem;
+}
+.landing-box {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 2rem;
+    max-width: 40rem;
+    min-width: 40rem;
+    display: inline-block;
+    text-align: center;
+}
+
+/* Exercise Page */
+
+.exercise-titlebox {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+.exercise-title {
+    display: inline-block;
+    margin-right: 28px;
+}
+.exercise-titlebox a {
+    display: block;
+    float: left;
+    padding: 1rem 0rem;
+}
+td {
+    min-width: 7rem;
+}
+
+/* WorkoutPage */
+.workout-titlebox {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+.workout-title {
+    display: inline-block;
+    margin-right: 28px;
+}
+.workout-titlebox a {
+    display: block;
+    float: left;
+    padding: 1rem 0rem;
+}
+
+/* Home Page */
+.exercise-bigbox {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.exercise-box {
+    border: 1px solid;
+    border-radius: 0.5rem;
+    margin: 0.5rem 0rem;
+    margin-right: 0.5rem;
+    padding: 1rem;
+    height: 12rem;
+    width: 12rem;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+}
+ /* .exercise-box:hover {
+     box-shadow: 0rem 0rem .75rem coral;
+ } */
+
+
+.new-exercise {
+    line-height: 12rem;
+}
+
+.exercise-image {
+    max-width: 100%;
+    max-height: 100%;
+    vertical-align: middle;
+}
+
+/* Profile Image */
+.account-img {
+    height: 25px;
+    width: 25px;
+}
