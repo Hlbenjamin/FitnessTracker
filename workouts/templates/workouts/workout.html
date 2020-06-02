@@ -7,7 +7,7 @@
     </div>
 </div>
         {% for exercise in workout.exercise %}
-        <h2 id="{{ exercise.exercise_name }}" class="big-link">{{ exercise.exercise_name }}</h2>
+        <a href="{% url 'workouts_exercise' exercise.id %}"><h2 id="{{ exercise.exercise_name }}" class="big-link">{{ exercise.exercise_name }}</h2></a>
         <table class="table">
             <tr>
                 <td class="pl-0">

@@ -91,11 +91,3 @@ def exercise(request, exercise_id):
 def landing(request):
     return render(request, 'workouts/landing.html')
 
-
-
-def dropdown(request):
-    form = MyForm
-    context = {
-        'form': form,
-    }
-    return render(request, 'workouts/dropdown.html', context)

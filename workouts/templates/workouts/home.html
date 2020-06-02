@@ -10,7 +10,7 @@
     {% endif %}
     <h1 class="display-4">My Workouts</h1>
     {% for workout in workouts %}
-    <h2 class="big-link">{{ workout.workout_name }}</h2>
+    <a href="{% url 'workouts_workout' workout.id %}"><h2 class="big-link">{{ workout.workout_name }}</h2></a>
     <div class="execise-bigbox">  
         {% for exercise in workout.exercise %}
         <a href="{% url 'workouts_workout' workout.id %}#{{ exercise.exercise_name }}">
