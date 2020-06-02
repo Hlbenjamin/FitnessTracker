@@ -7,7 +7,7 @@
     </div>
 </div>
         {% for exercise in workout.exercise %}
-        <h2 class="big-link">{{ exercise.exercise_name }}</h2>
+        <h2 id="{{ exercise.exercise_name }}" class="big-link">{{ exercise.exercise_name }}</h2>
         <table class="table">
             <tr>
                 <td class="pl-0">
