@@ -30,7 +30,10 @@
             <nav class="nav navbar-dark bg-dark py-2">
                 <div class="container nav">
                 <a class="navbar-brand" href="{% url 'workouts_home' %}">Fitness Tracker</a>
-                <a class="nav-link" href="{% url 'workouts_home' %}">HOME</a>
+                <a class="nav-link" href="{% url 'workouts_home' %}">My Workouts</a>
+                <!-- {% for workout in workouts %}
+                  <a class="nav-link"href="{% url 'workouts_workout' workout.id %}">{{ workout }}</a>
+                {% endfor %} -->
                 <a class="nav-link"href="/admin/">ADMIN</a>
                 <div class="dropdown ml-auto">
                   {% if user.is_authenticated %}

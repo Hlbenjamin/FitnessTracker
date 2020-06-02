@@ -10,10 +10,10 @@
     {% endif %}
     <h1 class="display-4">My Workouts</h1>
     {% for workout in workouts %}
-    <a class="text-decoration-none" href="{% url 'workouts_workout' workout.id %}"><h2 class="big-link">{{ workout.workout_name }}</h2></a>
+    <h2 class="big-link">{{ workout.workout_name }}</h2>
     <div class="execise-bigbox">  
         {% for exercise in workout.exercise %}
-        <a href="{% url 'workouts_exercise' exercise.id %}">
+        <a href="{% url 'workouts_workout' workout.id %}#{{ exercise.exercise_name }}">
             <div class="exercise-box">
                 <h5 class="home-title">{{ exercise.exercise_name }}</h5>
                 <img class="exercise-image" src="/media/exercise_pics/{{ exercise }}.jpg" alt="">

@@ -7,18 +7,21 @@
     </div>
 </div>
         {% for exercise in workout.exercise %}
-        <a class="text-decoration-none" href="{% url 'workouts_exercise' exercise.id %}"><h2 class="big-link">{{ exercise.exercise_name }}</h2></a>
-        <table class="table table-borderless">
+        <h2 class="big-link">{{ exercise.exercise_name }}</h2>
+        <table class="table">
             <tr>
                 <td class="pl-0">
-                    <div class="workout-box">
-                        <br>
-                        <img class="workout-image ml-0" src="/media/exercise_pics/{{ exercise }}.jpg" alt="">
-                    </div>
+                    <a href="{% url 'workouts_exercise' exercise.id %}">
+                        <div class="workout-box">
+                            <br>
+                            <img class="workout-image ml-0" src="/media/exercise_pics/{{ exercise }}.jpg" alt="">
+                        </div>
+                    </a>
                 </td>
                 {% for weight in exercise.weight|dictsortreversed:"date_posted"|slice:"3" reversed %}
-                <td class="table-data">
-                    <h5>{{ weight.weight }} lbs</h5><p>{{ weight.date_posted|date:'M d' }}</p>
+                <td class="table-data text-center">
+                    <h5>{{ weight.weight }} lbs</h5>
+                    <p>{{ weight.date_posted|date:'M d' }}</p>
                 </td>
                 
                 {% endfor %}

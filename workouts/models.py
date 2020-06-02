@@ -47,6 +47,7 @@ class Weight(models.Model):
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE, related_name='exercise')
     weight = models.DecimalField(decimal_places=0, max_digits=10000)
     date_posted = models.DateTimeField(default=timezone.now)
+    
     def __str__(self):
         return f'{self.weight}'
 

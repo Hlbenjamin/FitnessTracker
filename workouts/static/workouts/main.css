@@ -2,8 +2,9 @@
     margin-top: calc(30vh - 10.5rem);
 }
 
+
 a {
-    color: black;
+    color: black ;
 }
 
 body main {
@@ -103,6 +104,10 @@ td {
     float: left;
     padding: 1rem 0rem;
 }
+.workout-box:hover {
+    box-shadow: 0rem 0rem .2rem coral;
+}
+
 
 /* Home Page */
 .exercise-bigbox {
