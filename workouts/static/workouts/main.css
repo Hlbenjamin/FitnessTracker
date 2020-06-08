@@ -2,9 +2,15 @@
     margin-top: calc(30vh - 10.5rem);
 }
 
+.button-container {
+    text-align: center;
+}
 
 a {
     color: black ;
+}
+a:hover {
+    color: black;
 }
 
 body main {
@@ -105,7 +111,7 @@ td {
     padding: 1rem 0rem;
 }
 .workout-box:hover {
-    box-shadow: 0rem 0rem .2rem coral;
+    box-shadow: 0rem 0rem .4rem coral;
 }
 
 
@@ -134,7 +140,7 @@ td {
     transform: translateY(-35%);
 }
  .exercise-box:hover {
-     box-shadow: 0rem 0rem .2rem coral;
+     box-shadow: 0rem 0rem .4rem coral;
  }
 
 

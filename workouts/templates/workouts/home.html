@@ -9,6 +9,7 @@
         {% endfor %}
     {% endif %}
     <h1 class="display-4">My Workouts</h1>
+    {% if workouts %}
     {% for workout in workouts %}
     <a href="{% url 'workouts_workout' workout.id %}"><h2 class="big-link">{{ workout.workout_name }}</h2></a>
     <div class="execise-bigbox">  
@@ -17,8 +18,7 @@
             <div class="exercise-box">
                 <h5 class="home-title">{{ exercise.exercise_name }}</h5>
                 <img class="exercise-image" src="/media/exercise_pics/{{ exercise }}.jpg" alt="">
-            </div>
-        </a>
+            </div></a>
         {% endfor %}
         <div class="exercise-box new-exercise">
             <!-- ModalButtonExercise -->
@@ -57,9 +57,22 @@
     {% endfor %}
     <br>
     <!-- Button trigger modal -->
-<button type="button" class="btn btn-dark mb-5" data-toggle="modal" data-target="#exampleModal">
-    Add Workout
-</button>
+    <button type="button" class="btn btn-dark mb-5" data-toggle="modal" data-target="#exampleModal">
+        Add Workout
+    </button>
+    {% else %}
+    <br>
+    <h3 class="text-muted text-center">
+        Welcome to Fitness Tracker!<br>
+        To get started click 'Add Workout' to add your first workout!
+    </h3>
+    <br>
+    <div class="button-container">
+        <button type="button" class="btn btn-dark mb-5 float-center" data-toggle="modal" data-target="#exampleModal">
+            Add Workout
+        </button>
+    </div>
+    {% endif %}
 
   <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

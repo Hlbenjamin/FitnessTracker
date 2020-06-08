@@ -34,7 +34,6 @@
                 <!-- {% for workout in workouts %}
                   <a class="nav-link"href="{% url 'workouts_workout' workout.id %}">{{ workout }}</a>
                 {% endfor %} -->
-                <a class="nav-link"href="/admin/">ADMIN</a>
                 <div class="dropdown ml-auto">
                   {% if user.is_authenticated %}
                   <img class="rounded-circle account-img" src="{{ user.profile.image.url }}" alt="">

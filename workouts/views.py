@@ -3,6 +3,7 @@ from .models import Workout, Weight, Exercise, WorkoutData, ExerciseData
 from .forms import WeightForm, WorkoutForm, ExerciseForm
 from django.contrib.auth.decorators import login_required
 
+
 @login_required
 def home(request):
     workouts_all = WorkoutData.objects.all()

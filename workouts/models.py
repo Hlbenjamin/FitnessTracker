@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.db.models import Max
 
 class WorkoutData(models.Model):
     name = models.CharField(max_length=100)
@@ -47,7 +48,20 @@ class Weight(models.Model):
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE, related_name='exercise')
     weight = models.DecimalField(decimal_places=0, max_digits=10000)
     date_posted = models.DateTimeField(default=timezone.now)
+    code = models.IntegerField('Code', default=0)
     
+    def save(self, *args, **kwargs):
+        if self.code == 0:
+            max_code = Weight.objects.filter(exercise=self.exercise).aggregate(max_code = Max('code'))
+            try:
+                self.code = max_code.get('max_code',0)+1
+            except:
+                self.code = 1
+        return super(Weight, self).save(*args, **kwargs)
+
+    class Meta:
+        unique_together = ('exercise', 'code')
+
     def __str__(self):
         return f'{self.weight}'
 
