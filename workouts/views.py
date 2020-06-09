@@ -1,7 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from .models import Workout, Weight, Exercise, WorkoutData, ExerciseData
 from .forms import WeightForm, WorkoutForm, ExerciseForm
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+import json
 
 
 @login_required
@@ -92,3 +95,22 @@ def exercise(request, exercise_id):
 def landing(request):
     return render(request, 'workouts/landing.html')
 
+@csrf_exempt
+def weight_add(request, exercise_id):
+    if request.method == 'POST':
+        weight = request.POST['weight']
+        response_data = {}
+
+        new_weight = Weight(weight=weight, exercise_id=exercise_id)
+        new_weight.save()
+
+        response_data['result'] = 'Add weight successful!'
+        response_data['weight'] = new_weight.weight
+        response_data['exercise'] = new_weight.exercise_id
+
+        return HttpResponse('')
+
+        # return HttpResponse(
+        #     json.dumps(response_data),
+        #     content_type="application/json"
+        # )

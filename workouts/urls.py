@@ -6,4 +6,5 @@ urlpatterns = [
     path('home/', views.home, name='workouts_home'),
     path('workout/<int:workout_id>/', views.workout, name='workouts_workout'),
     path('exercise/<int:exercise_id>/', views.exercise, name='workouts_exercise'),
+    path('weight/add/<int:exercise_id>', views.weight_add, name='weight_add'),
 ]

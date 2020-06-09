@@ -1,50 +1,56 @@
 {% extends 'workouts/base.html' %}
 {% block content %}
+<script
+src="https://code.jquery.com/jquery-3.5.1.js"
+integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+crossorigin="anonymous">
+</script>
 <div class="workout-titlebox">
     <a class="text-decoration-none" href="{% url 'workouts_home' %}"><h2 class="big-link"><i class="fas fa-chevron-left"></i></h2></a>
     <div class="workout-title">
         <h1 class="display-4">{{ workout.workout_name }}</h1>
     </div>
 </div>
-        {% for exercise in workout.exercise %}
-        <a href="{% url 'workouts_exercise' exercise.id %}"><h2 id="{{ exercise.exercise_name }}" class="big-link">{{ exercise.exercise_name }}</h2></a>
-        <table class="table">
-            <tr>
-                <td class="pl-0">
-                    <a href="{% url 'workouts_exercise' exercise.id %}">
-                        <div class="workout-box">
-                            <br>
-                            <img class="workout-image ml-0" src="/media/exercise_pics/{{ exercise }}.jpg" alt="">
-                        </div>
-                    </a>
-                </td>
-                {% if exercise.weight %}
-                {% for weight in exercise.weight|dictsortreversed:"date_posted"|slice:"3" reversed %}
-                <td class="table-data text-center">
-                    <h3>Workout {{ weight.code }}</h3>
-                    <h5>{{ weight.weight }} lbs</h5>
-                    <p>{{ weight.date_posted|date:'M d' }}</p>
-                </td>
-                
-                {% endfor %}
-                {% else %}
-                <td>
-                    <p class="text-muted text-center">Enter your exercise weight to<br> start tracking progress!</p>
-                </td>
-                {% endif %}
-                <td class="table-button">
-                    <form id="weight-form" method="POST">
-                        {% csrf_token %}
-                        <input class="input-form" id="exercise" type="hidden" name="exercise" value="{{ exercise.id }}">
-                        <input class="input-form rounded" id="weight" type="text" name="weight" placeholder="New Weight">
-                        <button type="submit" class="btn btn-dark" name="btnform1">Add</button>
-                    </form>
-                </td>
-                <br>
-            </tr>
-        </table>
-        {% endfor %}
-        <br>
+    {% for exercise in workout.exercise %}
+        <div id="replace-section{{ exercise.id }}">
+            <a href="{% url 'workouts_exercise' exercise.id %}"><h2 id="{{ exercise.exercise_name }}" class="big-link">{{ exercise.exercise_name }}</h2></a>
+            <table class="table">
+                <tr>
+                    <td class="pl-0">
+                        <a href="{% url 'workouts_exercise' exercise.id %}">
+                            <div class="workout-box">
+                                <br>
+                                <img class="workout-image ml-0" src="/media/exercise_pics/{{ exercise }}.jpg" alt="">
+                            </div>
+                        </a>
+                    </td>
+                    {% if exercise.weight %}
+                    {% for weight in exercise.weight|dictsortreversed:"date_posted"|slice:"3" reversed %}
+                    <td class="table-data text-center">
+                        <h3>Workout {{ weight.code }}</h3>
+                        <h5>{{ weight.weight }} lbs</h5>
+                        <p>{{ weight.date_posted|date:'M d' }}</p>
+                    </td>
+                    {% endfor %}
+                    {% else %}
+                    <td>
+                        <p class="text-muted text-center">Enter your exercise weight to<br> start tracking progress!</p>
+                    </td>
+                    {% endif %}
+                    <td class="table-button">
+                        <form class="weight-form" action="/weight/add/{{ exercise.id }}" data-weightId="{{ exercise.id }}" method="POST">
+                            {% csrf_token %}
+                            <input class="input-form" id="exercise" type="hidden" name="exercise" value="{{ exercise.id }}">
+                            <input class="input-form rounded" id="weight" type="text" name="weight" placeholder="New Weight">
+                            <button type="submit" class="btn btn-dark" name="btnform1">Add</button>
+                        </form>
+                    </td>
+                    <br>
+                </tr>
+            </table>
+        </div>
+    {% endfor %}
+    <br>
         <!-- Button trigger modal -->
     <button type="button" class="btn btn-dark mb-5" data-toggle="modal" data-target="#{{ workout }}Modal">
         Add Exercise
@@ -78,21 +84,19 @@
             </div>
         </div>
     </div>
-{% endblock content %}
 <script>
-    $(document).on('submit', '#weight-form', function(e){
+    $(document).on('submit', '.weight-form', function(e) {
         e.preventDefault();
-
+        var weightId;
+        weightId = $(this).attr("data-weightId");
         $.ajax({
-            type:'POST',
-            url: '/workouts/workout/',
-            data:{
-                exercise:$('#exercise').val(),
-                weight:$('#weight').val(),
-            },
-            success:function(){
-                
+            type: 'POST',
+            url: $(this).attr('action'),
+            data: $(this).serialize(),
+            success: function(data){
+                $("#replace-section" + weightId).load(' #replace-section' + weightId,);
             }
         });
     });
 </script>
+{% endblock content %}
